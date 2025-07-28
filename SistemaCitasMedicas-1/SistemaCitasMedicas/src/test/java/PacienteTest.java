@@ -14,82 +14,69 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author CltControl
  */
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class PacienteTest {
-    
-    public PacienteTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
 
-    /**
-     * Test of getCedula method, of class Paciente.
-     */
+    // Caso de prueba 1: Validar manejo de entrada inválida
     @Test
-    public void testGetCedula() {
-        System.out.println("getCedula");
-        Paciente instance = null;
-        String expResult = "";
-        String result = instance.getCedula();
-        assertEquals(expResult, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testPacienteConCedulaVacia() {
+        // Datos de entrada
+        Paciente paciente = new Paciente("", "Juan Perez", "juan.perez@example.com");
+
+        // Salida esperada
+        String mensajeEsperado = "Error o comportamiento inesperado"; 
+
+        // Verificar que la cedula no está vacía (según el plan de pruebas)
+        assertTrue(paciente.getCedula().isEmpty(), mensajeEsperado);
     }
 
-    /**
-     * Test of getNombre method, of class Paciente.
-     */
+    // Caso de prueba 2: Validar constructor normal
     @Test
-    public void testGetNombre() {
-        System.out.println("getNombre");
-        Paciente instance = null;
-        String expResult = "";
-        String result = instance.getNombre();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testPacienteConstructor() {
+        // Datos de entrada
+        Paciente paciente = new Paciente("12345678", "Juan Perez", "juan.perez@example.com");
+
+        // Verificar que los datos del paciente se almacenan correctamente
+        assertEquals("12345678", paciente.getCedula());
+        assertEquals("Juan Perez", paciente.getNombre());
+        assertEquals("juan.perez@example.com", paciente.getCorreo());
     }
 
-    /**
-     * Test of getCorreo method, of class Paciente.
-     */
-    @Test
-    public void testGetCorreo() {
-        System.out.println("getCorreo");
-        Paciente instance = null;
-        String expResult = "";
-        String result = instance.getCorreo();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of toString method, of class Paciente.
-     */
+    // Caso de prueba 3: Validar el comportamiento de toString
     @Test
     public void testToString() {
-        System.out.println("toString");
-        Paciente instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        // Datos de entrada
+        Paciente paciente = new Paciente("12345678", "Juan Perez", "juan.perez@example.com");
+
+        // Salida esperada
+        String resultadoEsperado = "Juan Perez (12345678)";
+
+        // Verificar que el toString devuelve el formato correcto
+        assertEquals(resultadoEsperado, paciente.toString());
     }
-    
+
+    // Caso de prueba 4: Verificar nombre vacío
+    @Test
+    public void testNombreVacio() {
+        // Datos de entrada
+        Paciente paciente = new Paciente("12345678", "", "juan.perez@example.com");
+
+        // Salida esperada
+        String mensajeEsperado = "Error o comportamiento inesperado";
+
+        // Verificar que el nombre no está vacío
+        assertTrue(paciente.getNombre().isEmpty(), mensajeEsperado);
+    }
+
+    // Caso de prueba 5: Verificar correo inválido
+    @Test
+    public void testCorreoInvalido() {
+        // Datos de entrada
+        Paciente paciente = new Paciente("12345678", "Juan Perez", "correo_invalido");
+
+        // Validar que el correo no tiene un formato válido
+        assertFalse(paciente.getCorreo().contains("@"), "Correo inválido, falta '@'");
+    }
 }

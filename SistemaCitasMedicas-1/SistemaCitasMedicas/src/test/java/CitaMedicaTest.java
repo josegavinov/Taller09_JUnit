@@ -16,107 +16,73 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author CltControl
  */
 public class CitaMedicaTest {
-    
-    public CitaMedicaTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
 
-    /**
-     * Test of getPaciente method, of class CitaMedica.
-     */
+    // Caso de prueba 1: Validar constructor de CitaMedica con datos válidos
     @Test
-    public void testGetPaciente() {
-        System.out.println("getPaciente");
-        CitaMedica instance = null;
-        Paciente expResult = null;
-        Paciente result = instance.getPaciente();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testCitaMedicaConstructor() {
+        // Datos de entrada
+        Paciente paciente = new Paciente("12345678", "Juan Perez", "juan.perez@example.com");
+        Medico medico = new Medico("Dr. Luis", "Cardiología");
+        LocalDateTime fechaHora = LocalDateTime.of(2025, 7, 28, 10, 0);
+        
+        // Crear la cita médica
+        CitaMedica cita = new CitaMedica(paciente, medico, fechaHora);
+
+        // Verificar que los datos fueron correctamente asignados
+        assertEquals(paciente, cita.getPaciente());
+        assertEquals(medico, cita.getMedico());
+        assertEquals(fechaHora, cita.getFechaHora());
+        assertEquals("Agendada", cita.getEstado());
     }
 
-    /**
-     * Test of getMedico method, of class CitaMedica.
-     */
+    // Caso de prueba 2: Verificar la función toString()
     @Test
-    public void testGetMedico() {
-        System.out.println("getMedico");
-        CitaMedica instance = null;
-        Medico expResult = null;
-        Medico result = instance.getMedico();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testCitaMedicaToString() {
+        // Datos de entrada
+        Paciente paciente = new Paciente("12345678", "Juan Perez", "juan.perez@example.com");
+        Medico medico = new Medico("Dr. Luis", "Cardiología");
+        LocalDateTime fechaHora = LocalDateTime.of(2025, 7, 28, 10, 0);
+
+        // Crear la cita médica
+        CitaMedica cita = new CitaMedica(paciente, medico, fechaHora);
+        
+        // Salida esperada para el método toString()
+        String esperado = "Cita con Dr. Luis para Juan Perez (12345678) en 2025-07-28T10:00 [Agendada]";
+        
+        // Verificar que el toString() devuelve el formato esperado
+        assertEquals(esperado, cita.toString());
     }
 
-    /**
-     * Test of getFechaHora method, of class CitaMedica.
-     */
-    @Test
-    public void testGetFechaHora() {
-        System.out.println("getFechaHora");
-        CitaMedica instance = null;
-        LocalDateTime expResult = null;
-        LocalDateTime result = instance.getFechaHora();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getEstado method, of class CitaMedica.
-     */
-    @Test
-    public void testGetEstado() {
-        System.out.println("getEstado");
-        CitaMedica instance = null;
-        String expResult = "";
-        String result = instance.getEstado();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setEstado method, of class CitaMedica.
-     */
+    // Caso de prueba 3: Cambiar el estado de la cita con setEstado()
     @Test
     public void testSetEstado() {
-        System.out.println("setEstado");
-        String estado = "";
-        CitaMedica instance = null;
-        instance.setEstado(estado);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        // Datos de entrada
+        Paciente paciente = new Paciente("12345678", "Juan Perez", "juan.perez@example.com");
+        Medico medico = new Medico("Dr. Luis", "Cardiología");
+        LocalDateTime fechaHora = LocalDateTime.of(2025, 7, 28, 10, 0);
+        
+        // Crear la cita médica
+        CitaMedica cita = new CitaMedica(paciente, medico, fechaHora);
+
+        // Cambiar el estado de la cita
+        cita.setEstado("Cancelada");
+
+        // Verificar que el estado fue correctamente actualizado
+        assertEquals("Cancelada", cita.getEstado());
     }
 
-    /**
-     * Test of toString method, of class CitaMedica.
-     */
+    // Caso de prueba 4: Verificar estado de la cita después de la creación
     @Test
-    public void testToString() {
-        System.out.println("toString");
-        CitaMedica instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testEstadoInicial() {
+        // Datos de entrada
+        Paciente paciente = new Paciente("12345678", "Juan Perez", "juan.perez@example.com");
+        Medico medico = new Medico("Dr. Luis", "Cardiología");
+        LocalDateTime fechaHora = LocalDateTime.of(2025, 7, 28, 10, 0);
+        
+        // Crear la cita médica
+        CitaMedica cita = new CitaMedica(paciente, medico, fechaHora);
+
+        // Verificar que el estado inicial es "Agendada"
+        assertEquals("Agendada", cita.getEstado());
     }
-    
 }
