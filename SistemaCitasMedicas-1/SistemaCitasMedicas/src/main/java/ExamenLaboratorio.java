@@ -13,6 +13,28 @@ public class ExamenLaboratorio {
         this.resultado = resultado;
     }
 
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public String getTipoExamen() {
+        return tipoExamen;
+    }
+
+    public void setTipoExamen(String tipoExamen) {
+        this.tipoExamen = tipoExamen;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+
+
     @Override
     public String toString() {
         return "Examen: " + tipoExamen + " - Paciente: " + paciente + " - Resultado: " + resultado;
